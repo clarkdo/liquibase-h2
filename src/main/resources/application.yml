@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: Lquibase H2
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/liquibase-demo;DB_CLOSE_ON_EXIT=FALSE
+    username: admin
+    password: admin
+  h2:
+    console:
+      enabled: true
+      path: /h2
+liquibase:
+  change-log: classpath:/db/changelog-master.yaml
