@@ -42,4 +42,7 @@
             <column name="city" value="厦门"/>
         </insert>
     </changeSet>
+    <changeSet id="tag-1.0" author="clark">
+        <tagDatabase tag="v1.0"></tagDatabase>
+    </changeSet>
 </databaseChangeLog>
