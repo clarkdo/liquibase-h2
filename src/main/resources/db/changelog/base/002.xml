@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet id="1" author="clark">
+        <createTable tableName="address" remarks="Address Info Table">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="address" type="varchar(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="clark">
+        <addUniqueConstraint columnNames="address"
+                             constraintName="addr_name"
+                             tableName="address"/>
+    </changeSet>
+    <changeSet id="3" author="clark">
+        <insert tableName="address">
+            <column name="address" value="浙江省杭州市"/>
+        </insert>
+        <insert tableName="address">
+            <column name="address" value="辽宁省大连市"/>
+        </insert>
+        <insert tableName="address">
+            <column name="address" value="福建省厦门市"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

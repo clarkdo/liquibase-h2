@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet id="purge-addr-1" author="clark">
+        <delete tableName="address">
+            <where>1 = 1</where>
+        </delete>
+    </changeSet>
+    <changeSet id="add-province" author="clark">
+        <addColumn catalogName="liquibase-demo"
+                   tableName="address">
+            <column name="province" type="varchar(80)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="add-city" author="clark">
+        <addColumn catalogName="liquibase-demo" tableName="address">
+            <column name="city" type="varchar(50)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="drop-addr" author="clark">
+        <dropColumn columnName="address" tableName="address"/>
+    </changeSet>
+    <changeSet id="insert-addr-1" author="clark">
+        <insert tableName="address">
+            <column name="province" value="浙江"/>
+            <column name="city" value="杭州"/>
+        </insert>
+        <insert tableName="address">
+            <column name="province" value="辽宁"/>
+            <column name="city" value="大连"/>
+        </insert>
+        <insert tableName="address">
+            <column name="province" value="福建"/>
+            <column name="city" value="厦门"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

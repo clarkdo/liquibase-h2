@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - preConditions:
+    - runningAs:
+        username: admin
+    - or:
+      - type:
+        - mysql
+        - h2
+  - include:
+      file: db/changelog/base/001.yaml
+#  - include:
+#      file: db/changelog/base/002.xml
+#  - include:
+#      file: db/changelog/base/003.xml

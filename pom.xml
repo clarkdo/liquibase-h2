@@ -9,6 +9,9 @@
   <groupId>com.github.clarkdo</groupId>
   <artifactId>liquibase-h2</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <properties>
+    <liquibase-change-log>classpath:/db/changelog-base.yaml</liquibase-change-log>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>com.h2database</groupId>
@@ -73,6 +76,61 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-resources</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>target/classes</outputDirectory>
+              <useDefaultDelimiters>false</useDefaultDelimiters>
+              <delimiters>
+                <delimiter>#</delimiter>
+              </delimiters>
+              <resources>
+                <resource>
+                  <directory>src/main/resources/</directory>
+                  <filtering>true</filtering>
+                  <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                  </includes>
+                </resource>
+                <resource>
+                  <directory>src/main/resources/</directory>
+                  <filtering>false</filtering>
+                  <excludes>
+                    <exclude>**/*.xml</exclude>
+                    <exclude>**/*.yml</exclude>
+                  </excludes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <liquibase-change-log>classpath:/db/changelog-dev.yaml</liquibase-change-log>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <liquibase-change-log>classpath:/db/changelog-prod.yaml</liquibase-change-log>
+      </properties>
+    </profile>
+  </profiles>
 </project>
